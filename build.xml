@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- Sample build file used to retrieve svnant's sources -->
+<project name="svn-test" basedir="." default="svnDiff">
+  
+  <!--  all properties are in build.properties --> 
+  <property file="build.properties" /> 
+
+  
+
+
+  <target name="svnCheckout">
+
+    <property name="source-root" value="D:/svnant/repo"/>
+    <property name="repository.URL" value="https://svn.apache.org/repos/asf/excalibur/trunk/components"/>
+
+
+    <java classname="org.tmatesoft.svn.cli.SVN"
+       dir="${source-root}" fork="true">
+      <arg value="co"/>
+      <arg value="--username"/>
+      <arg value=""/>
+      <arg value="--password"/>
+      <arg value=""/>
+      <arg value="${repository.URL}"/>
+
+      <classpath>
+        <pathelement location="lib/ganymed.jar" />
+        <pathelement location="lib/svnkit.jar" />
+        <pathelement location="lib/svnkit-cli.jar" />
+      </classpath>
+    </java>
+
+
+  </target>
+
+  <target name="svnDiff">
+    <property name="source-root" value="D:/svnant/repo"/>
+    <property name="repository.URL" value="https://svn.apache.org/repos/asf/excalibur/trunk/components"/>
+    <java classname="org.tmatesoft.svn.cli.SVN"
+       dir="${source-root}" fork="true">
+      <arg value="log"/>
+      <arg value="${source-root}/components"/>
+      <arg value="--username"/>
+      <arg value=""/>
+      <arg value="--password"/>
+      <arg value=""/>
+      <classpath>
+        <pathelement location="lib/ganymed.jar" />
+        <pathelement location="lib/svnkit.jar" />
+        <pathelement location="lib/svnkit-cli.jar" />
+      </classpath>
+    </java>
+  </target>
+
+</project>
